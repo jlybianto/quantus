@@ -1,0 +1,46 @@
+{% from "macros.html" import nav_link with context %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>   
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Quantus</title>
+    
+    <style>
+      div#main {
+        max-width: 500px;
+        padding: 20px;
+      }
+      
+      nav .title {
+        font-weight: bold;
+      }
+      
+      a.active {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <span class="title">Quantus - Graphing Calculator with Applications</span>
+      <ul class="nav navbar-nav">
+        {{ nav_link('compound_interest_get', 'Theory of Interest') }}
+        {{ nav_link('minimum_balance_get', 'Paying Minimum Balance') }}
+      </ul>
+    </nav>
+    <div id="main">
+      <br>
+      {% block content %}{% endblock %}
+      <br>
+    </div>
+    <footer>
+      {% block footer %}
+      <br>
+      <br>
+      {% endblock %}
+    </footer>
+  </body>
+</html>
