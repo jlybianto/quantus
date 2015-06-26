@@ -1,12 +1,13 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 from math import log
 import datetime
+
 current_time=datetime.datetime.now()
 
 app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
-def test():
+def test():  
   return render_template('base.html',
                          my_title="Home page is currently under construction",
                          current_time=datetime.datetime.now())
@@ -47,8 +48,44 @@ def compound_interest_post():
 def minimum_balance_get():
   return render_template('pay_minimum.html',
                         my_title="Paying Minimum Balance",
+                        balance="",
+                        annualInterestRate="",
+                        monthlyPaymentRate="",
                         current_time=datetime.datetime.now())
 
+@app.route("/min", methods=["POST"])
+def minimum_balance_post():
+  balance = request.form["balance"]
+  annualInterestRate = request.form["annualInterestRate"]
+  monthlyPaymentRate = request.form["monthlyPaymentRate"]
+  
+  month = 0
+  totalPaid = 0
+  monthsInYear = range(0, 12)
+  for month in monthsInYear:
+    minimumMonthlyPayment = float(monthlyPaymentRate) * float(balance)
+    monthlyUnpaidBalance = float(balance) - float(minimumMonthlyPayment)
+    monthlyInterest = (float(annualInterestRate) / 12.0) * float(monthlyUnpaidBalance)
+    balance = monthlyUnpaidBalance + monthlyInterest
+    month += 1
+    totalPaid = minimumMonthlyPayment
+  
+  return render_template('pay_minimum.html',
+                        my_title="Paying Minimum Balance",
+                        balance=balance,
+                        annualInterestRate=annualInterestRate,
+                        monthlyPaymentRate=monthlyPaymentRate,
+                        month=month,
+                        minimumMonthlyPayment=minimumMonthlyPayment,                        
+                        current_time=datetime.datetime.now())
+
+#     print "Month: " + str(month)
+#     print "Minimum monthly payment: " + str(round(minimumMonthlyPayment, 2))
+#     print "Remaining balance: " + str(round(balance, 2))
+  
+#   print "Total paid: " + str(round(totalPaid, 2))
+#   print "Remaining balance: " + str(round(balance, 2))
+  
 @app.template_filter()
 def datetimefilter(value, format='%Y/%m/%d %H:%M'):
   """Convert a datetime to a different format."""
