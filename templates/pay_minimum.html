@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{my_title}}</h1>
+<br>
+<form role="form" method="POST">
+  <div class="form-group">
+    <label for="balance">Balance</label>
+    <input type="text" class="form-control" id="balance" name="balance" value="{{balance}}">
+  </div>
+  <div class="form-group">
+    <label for="annualInterestRate">Interest Rate</label>
+    <input type="text" class="form-control" id="annualInterestRate" name="annualInterestRate" value="{{annualInterestRate}}">
+  </div>
+  <div class="form-group">
+    <label for="monthlyPaymentRate">Monthly Payment Rate</label>
+    <input type="text" class="form-control" id="monthlyPaymentRate" name="monthlyPaymentRate" value="{{monthlyPaymentRate}}">
+  </div>
+  <button type="submit" class="btn btn-default">Calculate</button>
+</form>
+{% endblock %}
+
+{% block result %}
+<h3>Result</h3>
+<br>
+<ul>
+  {% for month in monthsInYear %}
+  <li>Month: {{month}}</li>
+  {% endfor %}
+</ul>
+</br>
+{% endblock %}
+
+{% block footer %}
+{{super()}}
+<h4>Current date/time: {{ current_time | datetimefilter }}</h4>
+{% endblock %}
