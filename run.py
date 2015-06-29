@@ -28,6 +28,8 @@ def compound_interest_post():
   interest_rate = request.form["interest_rate"]
   time = request.form["time"]
   future_value = request.form["future_value"]
+  if ((not present_value) + (not interest_rate) + (not time) + (not future_value)) != 1:
+    raise RuntimeError
   if not present_value:
     present_value = round(float(future_value) / ((1 + float(interest_rate)) ** float(time)), 2)
   elif not interest_rate:
@@ -68,15 +70,17 @@ def minimum_balance_post():
     monthlyInterest = (float(annualInterestRate) / 12.0) * float(monthlyUnpaidBalance)
     balance = monthlyUnpaidBalance + monthlyInterest
     month += 1
-    totalPaid = minimumMonthlyPayment
+    totalPaid += minimumMonthlyPayment
   
   return render_template('pay_minimum.html',
                         my_title="Paying Minimum Balance",
-                        balance=balance,
+                        balance = request.form["balance"],
                         annualInterestRate=annualInterestRate,
                         monthlyPaymentRate=monthlyPaymentRate,
                         month=month,
-                        minimumMonthlyPayment=minimumMonthlyPayment,                        
+                        minimumMonthlyPayment=minimumMonthlyPayment,
+                        totalPaid="%.2f" % totalPaid,
+                        remainingBalance="%.2f" % balance,
                         current_time=datetime.datetime.now())
 
 #     print "Month: " + str(month)
