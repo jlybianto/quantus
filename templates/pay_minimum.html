@@ -4,18 +4,19 @@
 <h1>{{my_title}}</h1>
 <br>
 <form role="form" method="POST">
-  <div class="form-group">
-    <label for="balance">Balance</label>
-    <input type="text" class="form-control" id="balance" name="balance" value="{{balance}}">
-  </div>
-  <div class="form-group">
-    <label for="annualInterestRate">Interest Rate</label>
-    <input type="text" class="form-control" id="annualInterestRate" name="annualInterestRate" value="{{annualInterestRate}}">
-  </div>
-  <div class="form-group">
-    <label for="monthlyPaymentRate">Monthly Payment Rate</label>
-    <input type="text" class="form-control" id="monthlyPaymentRate" name="monthlyPaymentRate" value="{{monthlyPaymentRate}}">
-  </div>
+  <table>
+    <tr>
+      <td>Balance</td>
+      <td><input type="text" class="form-control" id="balance" name="balance" value="{{balance}}"></td>
+    </tr>
+    <tr>
+      <td>Interest Rate</td>
+      <td><input type="text" class="form-control" id="annualInterestRate" name="annualInterestRate" value="{{annualInterestRate}}"></td>
+    </tr>
+    <tr>
+      <td>Monthly Payment Rate</td><td><input type="text" class="form-control" id="monthlyPaymentRate" name="monthlyPaymentRate" value="{{monthlyPaymentRate}}"></td>
+    </tr>
+  </table>
   <button type="submit" class="btn btn-default">Calculate</button>
 </form>
 {% endblock %}
@@ -23,12 +24,9 @@
 {% block result %}
 <h3>Result</h3>
 <br>
-<ul>
-  {% for month in monthsInYear %}
-  <li>Month: {{month}}</li>
-  {% endfor %}
-</ul>
-</br>
+<p>Total Paid: {{totalPaid}}</p>
+<p>Remaining Balance: {{remainingBalance}}</p>
+<br>
 {% endblock %}
 
 {% block footer %}

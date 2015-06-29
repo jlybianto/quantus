@@ -4,22 +4,24 @@
 <h1>{{my_title}}</h1>
 <br>
 <form role="form" method="POST">
-  <div class="form-group">
-    <label for="present_value">Present Value</label>
-    <input type="text" class="form-control" id="present_value" name="present_value" value="{{present_value}}">
-  </div>
-  <div class="form-group">
-    <label for="interest_rate">Interest Rate</label>
-    <input type="text" class="form-control" id="interest_rate" name="interest_rate" value="{{interest_rate}}">
-  </div>
-  <div class="form-group">
-    <label for="time">Time</label>
-    <input type="text" class="form-control" id="time" name="time" value="{{time}}">
-  </div>
-  <div class="form-group">
-    <label for="future_value">Future Value</label>
-    <input type="text" class="form-control" id="future_value" name="future_value" value="{{future_value}}">
-  </div>
+  <table>
+    <tr>
+      <td>Present Value</td>
+      <td><input type="text" class="form-control" id="present_value" name="present_value" value="{{present_value}}"></td>
+    </tr>
+    <tr>
+      <td>Interest Rate</td>
+      <td><input type="text" class="form-control" id="interest_rate" name="interest_rate" value="{{interest_rate}}"></td>
+    </tr>
+    <tr>
+      <td>Time</td>
+      <td><input type="text" class="form-control" id="time" name="time" value="{{time}}"></td>
+    </tr>
+    <tr>
+      <td>Future Value</td>
+      <td><input type="text" class="form-control" id="future_value" name="future_value" value="{{future_value}}"></td>
+    </tr>
+  </table>
   <button type="submit" class="btn btn-default">Calculate</button>
 </form>
 {% endblock %}
