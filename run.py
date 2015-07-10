@@ -82,13 +82,6 @@ def minimum_balance_post():
                         totalPaid="%.2f" % totalPaid,
                         remainingBalance="%.2f" % balance,
                         current_time=datetime.datetime.now())
-
-#     print "Month: " + str(month)
-#     print "Minimum monthly payment: " + str(round(minimumMonthlyPayment, 2))
-#     print "Remaining balance: " + str(round(balance, 2))
-  
-#   print "Total paid: " + str(round(totalPaid, 2))
-#   print "Remaining balance: " + str(round(balance, 2))
   
 @app.template_filter()
 def datetimefilter(value, format='%Y/%m/%d %H:%M'):
